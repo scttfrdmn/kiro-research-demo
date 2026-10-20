@@ -21,3 +21,4 @@ These rules apply to every change in this repository.
 
 ## Reporting
 - Never state a number you did not compute in this session. Quote results from the actual output.
+- Prices, quotas, capacity and runtimes come only from a tool result in this session. If no tool returned the number, say it is unknown; do not supply one from memory or the web.

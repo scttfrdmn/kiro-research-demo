@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "spore-host": {
+      "command": "spore-host-mcp",
+      "args": [],
+      "env": {
+        "AWS_REGION": "us-west-2"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "truffle_find",
+        "truffle_spot_prices",
+        "truffle_quota_check",
+        "spawn_list",
+        "spawn_status",
+        "lagotto_list",
+        "lagotto_status"
+      ],
+      "disabledTools": []
+    }
+  }
+}
