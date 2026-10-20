@@ -19,7 +19,7 @@ Typed verbatim in the recordings, so takes are comparable.
 
    > Tests must assert known values: a constant field returns that constant, and cell areas sum to 4π to rounding error.
 
-4. Run the tasks. Save `global_mean.py` to show the hook firing.
+4. Run the tasks. The hook runs `pytest` when the agent saves a Python file. Kiro's docs describe `PostFileSave` as firing after the agent saves or edits a file; whether a manual save also fires it is unverified, so check on the first take.
 5. Reveal: `python global_mean.py`.
 
 ### Reference values for this data file
