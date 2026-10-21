@@ -3,7 +3,7 @@
 #   1. checks era5/run.sh and era5/era5.py still match their pins,
 #   2. creates a private bucket for this demo if it does not exist,
 #   3. uploads them and the pins,
-#   4. writes era5/era5-2023.task.json, the task spec Demo 2 runs.
+#   4. writes era5/era5-2023.task.json, the task spec Demo 2 runs, with the network to use.
 # Nothing here launches an instance or costs more than a few cents of S3.
 cd "$(dirname "$0")/.."
 source scripts/common.sh
@@ -18,17 +18,26 @@ for f in run.sh era5.py; do
   fi
 done
 
-# spawn tasks launch into the region's default VPC; a task cannot name a subnet yet
-# (spore-host/spawn#1267). Fail here, before anything is created, rather than at launch.
+# Where the task's instance goes. With a default VPC, spawn uses it. Without one (as in
+# accounts built by Control Tower), the task names a subnet: SUBNET=subnet-... if you set
+# it, otherwise one that gives instances a public IP, so they reach S3 and the ERA5 mirror.
 default_vpc=$(aws ec2 describe-vpcs --region "$REGION" --filters Name=is-default,Values=true \
   --query 'Vpcs[0].VpcId' --output text 2>/dev/null)
-if [ -z "$default_vpc" ] || [ "$default_vpc" = "None" ]; then
-  echo "This account has no default VPC in $REGION, and spawn tasks need one until" >&2
-  echo "https://github.com/spore-host/spawn/issues/1267 ships." >&2
-  echo "To create one (free, and you can delete it later): aws ec2 create-default-vpc --region $REGION" >&2
-  exit 1
+if [ -n "${SUBNET:-}" ]; then
+  echo "network: subnet $SUBNET (from SUBNET)"
+elif [ -n "$default_vpc" ] && [ "$default_vpc" != "None" ]; then
+  SUBNET=""
+  echo "network: the default VPC in $REGION"
+else
+  SUBNET=$(aws ec2 describe-subnets --region "$REGION" --filters Name=map-public-ip-on-launch,Values=true \
+    --query 'sort_by(Subnets, &AvailabilityZone)[0].SubnetId' --output text 2>/dev/null)
+  if [ -z "$SUBNET" ] || [ "$SUBNET" = "None" ]; then
+    echo "No default VPC in $REGION and no subnet that maps public IPs." >&2
+    echo "Set SUBNET=subnet-... to a subnet with a route to S3, or: aws ec2 create-default-vpc --region $REGION" >&2
+    exit 1
+  fi
+  echo "network: no default VPC in $REGION; using public subnet $SUBNET (set SUBNET=... to choose another)"
 fi
-echo "network: default VPC $default_vpc in $REGION"
 
 if aws s3api head-bucket --bucket "$BUCKET" --region "$REGION" >/dev/null 2>&1; then
   echo "bucket:  s3://$BUCKET (exists)"
@@ -43,5 +52,5 @@ for f in run.sh era5.py pins.sha256; do
 done
 echo "uploaded: run.sh, era5.py, pins.sha256 to $PREFIX/code/"
 
-sed "s|__BUCKET__|$BUCKET|g" era5/task.template.json > era5/era5-2023.task.json
+sed -e "s|__BUCKET__|$BUCKET|g" -e "s|__SUBNET__|$SUBNET|g" era5/task.template.json > era5/era5-2023.task.json
 echo "wrote:   era5/era5-2023.task.json (results go to $PREFIX/runs/era5-2023/)"

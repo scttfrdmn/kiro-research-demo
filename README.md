@@ -16,10 +16,10 @@ Demo 1 finds and fixes the bug on a small synthetic file whose correct answer is
 
 | | |
 |---|---|
-| AWS | An account whose credentials work in your shell (`aws sts get-caller-identity`). Demo 2 runs in **us-west-2**, where the ERA5 mirror lives. It needs permission to launch EC2 instances, create an IAM instance profile, and create one S3 bucket, and a **default VPC** in us-west-2 (`aws ec2 create-default-vpc --region us-west-2` if yours was removed; see [spawn#1267](https://github.com/spore-host/spawn/issues/1267)). `scripts/setup-aws.sh` checks for it. |
+| AWS | An account whose credentials work in your shell (`aws sts get-caller-identity`). Demo 2 runs in **us-west-2**, where the ERA5 mirror lives. It needs permission to launch EC2 instances, create an IAM instance profile, and create one S3 bucket, and a network to launch into: the default VPC in us-west-2, or, if your account has none, a subnet that gives instances public IPs. `scripts/setup-aws.sh` finds one, or set `SUBNET=subnet-...` to choose. Needs spawn 0.140.0 or later. |
 | Cost | One Demo 2 run is about **$0.16**: an r8g.2xlarge On-Demand for about 20 minutes. The task spec caps it: a 45-minute TTL, termination when the job finishes, and a $0.50 cost limit. Results in S3 cost cents per month. |
 | Kiro | The [Kiro IDE](https://kiro.dev) for Demo 1 and the [Kiro CLI](https://kiro.dev/docs/cli/) (`kiro-cli`) for Demo 2, both signed in. |
-| spore.host | `brew install spore-host/tap/spore-host-mcp` — the MCP server that gives Kiro the truffle and spawn tools ([spore-host-mcp](https://github.com/spore-host/spore-host-mcp)). |
+| spore.host | `brew install spore-host/tap/spore-host-mcp` (0.43.0 or later) — the MCP server that gives Kiro the truffle and spawn tools ([spore-host-mcp](https://github.com/spore-host/spore-host-mcp)). |
 | Python | [uv](https://docs.astral.sh/uv/). |
 
 ```sh

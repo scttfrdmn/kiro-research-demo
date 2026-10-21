@@ -9,6 +9,9 @@
     "instance_type": "r8g.2xlarge",
     "purchase": "on_demand"
   },
+  "placement": {
+    "subnet_id": "__SUBNET__"
+  },
   "inputs": [
     {
       "source": "s3://nsf-ncar-era5/e5.oper.an.sfc/202301/e5.oper.an.sfc.128_167_2t.ll025sc.2023010100_2023013123.nc",
