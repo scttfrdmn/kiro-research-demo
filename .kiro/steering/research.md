@@ -14,6 +14,7 @@ These rules apply to every change in this repository.
 ## Reproducibility
 - Pin random seeds and package versions. Record the data source and its checksum for any input file.
 - Never edit a reported or expected number without re-running the computation that produces it.
+- Run all Python through `uv run` (`uv run pytest ...`, `uv run python ...`). Never call `python`, `python3` or `.venv/bin/python` directly.
 
 ## Scope
 - Make the smallest change that satisfies the approved requirements. Do not add frameworks, configuration systems, or abstractions the requirements do not ask for.

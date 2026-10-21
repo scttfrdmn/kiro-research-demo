@@ -6,7 +6,7 @@
       "description": "Runs the test suite whenever a Python file in the project is saved, so every edit is checked against known values.",
       "trigger": "PostFileSave",
       "matcher": "\\.py$",
-      "action": { "type": "command", "command": "python -m pytest -q tests" },
+      "action": { "type": "command", "command": "uv run pytest -q tests" },
       "timeout": 120,
       "enabled": true
     }
