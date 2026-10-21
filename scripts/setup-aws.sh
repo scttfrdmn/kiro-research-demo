@@ -18,6 +18,18 @@ for f in run.sh era5.py; do
   fi
 done
 
+# spawn tasks launch into the region's default VPC; a task cannot name a subnet yet
+# (spore-host/spawn#1267). Fail here, before anything is created, rather than at launch.
+default_vpc=$(aws ec2 describe-vpcs --region "$REGION" --filters Name=is-default,Values=true \
+  --query 'Vpcs[0].VpcId' --output text 2>/dev/null)
+if [ -z "$default_vpc" ] || [ "$default_vpc" = "None" ]; then
+  echo "This account has no default VPC in $REGION, and spawn tasks need one until" >&2
+  echo "https://github.com/spore-host/spawn/issues/1267 ships." >&2
+  echo "To create one (free, and you can delete it later): aws ec2 create-default-vpc --region $REGION" >&2
+  exit 1
+fi
+echo "network: default VPC $default_vpc in $REGION"
+
 if aws s3api head-bucket --bucket "$BUCKET" --region "$REGION" >/dev/null 2>&1; then
   echo "bucket:  s3://$BUCKET (exists)"
 else
