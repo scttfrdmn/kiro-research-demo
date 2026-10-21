@@ -58,7 +58,7 @@ If you use a named AWS profile, `export AWS_PROFILE=<name>` first; the spore.hos
 What happens:
 
 - **Right-sizing** (`truffle_find`, `truffle_spot_prices`, `truffle_quota_check`): the instance comes from a measurement of this workload, not a guess.
-- **Dry run, then launch** (`spawn_task_run`): Kiro asks before each call. The instance reads 12 monthly ERA5 files (13.35 GB) straight from the public mirror, checks every file against `era5/pins.sha256`, and runs `era5/era5.py`.
+- **Dry run, then launch** (`spawn_task_run`): Kiro asks before each call. The instance reads 12 monthly ERA5 files (13.35 GB) straight from the public mirror, checks every file against `era5/pins.sha256`, and runs `era5/run.sh`, which runs `era5/era5.py`.
 - **The instance ends itself** when the job finishes; `spawn_status` reports the outcome and the cost.
 - **Results** (`results/`): your fixed `global_mean.py` runs on the year's annual-mean field and should print **288.133 K** (14.98 °C). On `main` it prints 279.230 K (6.08 °C).
 - **The graph**: `results/era5-2023.png`, the daily 2023 global mean, area-weighted against `np.mean`.
@@ -101,7 +101,7 @@ The second command deletes the demo bucket and everything in it. spawn keeps the
 | `.kiro/hooks/identity-tests.json` | Runs `pytest` whenever a Python file is saved |
 | `.kiro/agents/research.json` | The Demo 2 agent and what it may do |
 | `.kiro/settings/mcp.json` | Connects Kiro to spore-host-mcp |
-| `era5/era5.py`, `era5/pins.sha256` | The ERA5 runner and the checksums of its inputs |
+| `era5/run.sh`, `era5/era5.py`, `era5/pins.sha256` | The task script, the ERA5 runner, and the checksums of everything the instance reads |
 | `era5/task.template.json` | The Demo 2 task spec; `scripts/setup-aws.sh` fills in your bucket |
 | `scripts/` | Setup and fetch |
 | `plot_2023.py` | The closing graph |
