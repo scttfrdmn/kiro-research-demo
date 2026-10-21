@@ -11,8 +11,12 @@ import xarray as xr
 
 def global_mean(path):
     ds = xr.open_dataset(path)
-    temp = ds["tas"].values          # (time, lat, lon)
-    return float(np.mean(temp))      # mean over every grid point
+    # Area-weight by cos(latitude): cells near the poles cover less surface
+    # area on a regular lat-lon grid. Longitude/time cells at a fixed latitude
+    # share equal area, so only latitude carries a relative weight.
+    w_da = xr.DataArray(np.cos(np.deg2rad(ds["lat"])), dims="lat")
+    mean = ds["tas"].weighted(w_da).mean(("time", "lat", "lon"))
+    return float(mean)               # area-weighted global mean
 
 
 if __name__ == "__main__":

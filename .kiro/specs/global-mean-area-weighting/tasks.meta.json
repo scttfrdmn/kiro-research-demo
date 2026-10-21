@@ -1,0 +1,148 @@
+{
+  "pbtResults": {
+    "1. Write bug condition exploration test": {
+      "status": "passed",
+      "failingExample": "On UNFIXED global_mean.py, the fix-validation assertion math.isclose(result, target, rel_tol=1e-9, abs_tol=1e-9) FAILS, confirming the bug:\n  result (unfixed np.mean) = 266.6666666666667 K\n  target (hand area-weighted) = 275.0 K\n  cold bias = target - result = 8.333... K\nCounterexample field: two-band tas, A=300.0 K over |lat|<=29 (30 lats), B=250.0 K over |lat|>=31 (60 lats), 2-degree grid. sum(w_warm)=28.649344249275085, sum(w_cold)=28.649344249275092 (differ 7.1e-15), so target==275.0 exactly in float64.",
+      "lastRunTimestamp": 1792601168618
+    },
+    "3.2 Verify bug condition exploration test now passes": {
+      "status": "passed",
+      "lastRunTimestamp": 1792601480822
+    },
+    "3.3 Verify preservation tests still pass": {
+      "status": "passed",
+      "lastRunTimestamp": 1792601529431
+    }
+  },
+  "executionHistory": {
+    "1. Write bug condition exploration test": [
+      {
+        "executionId": "cf1bf137-e3ba-42e4-a457-89002ba458e6",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792600862394
+      },
+      {
+        "executionId": "cf1bf137-e3ba-42e4-a457-89002ba458e6",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792600867856
+      },
+      {
+        "executionId": "cf1bf137-e3ba-42e4-a457-89002ba458e6",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601025296
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601110629
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601183344
+      }
+    ],
+    "2. Write preservation property tests (BEFORE implementing fix)": [
+      {
+        "executionId": "cf1bf137-e3ba-42e4-a457-89002ba458e6",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792600862463
+      },
+      {
+        "executionId": "cf1bf137-e3ba-42e4-a457-89002ba458e6",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601027927
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601108219
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601185779
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601311255
+      }
+    ],
+    "3.1 Implement the area-weighted reduction": [
+      {
+        "executionId": "cf1bf137-e3ba-42e4-a457-89002ba458e6",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792600862518
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601314056
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601439589
+      }
+    ],
+    "3.2 Verify bug condition exploration test now passes": [
+      {
+        "executionId": "cf1bf137-e3ba-42e4-a457-89002ba458e6",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792600862548
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601442112
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601491992
+      }
+    ],
+    "3.3 Verify preservation tests still pass": [
+      {
+        "executionId": "cf1bf137-e3ba-42e4-a457-89002ba458e6",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792600862576
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601494487
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601542047
+      }
+    ],
+    "4. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "cf1bf137-e3ba-42e4-a457-89002ba458e6",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792600862631
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601544882
+      },
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601600291
+      }
+    ],
+    "3. Fix missing cos(latitude) area weighting in global_mean": [
+      {
+        "executionId": "bcebf7a6-c8a0-469f-98b0-ea050e0fbe07",
+        "chatSessionId": "sess_1ea882f4-7d59-482a-82c0-34ff2e42551c",
+        "timestamp": 1792601542082
+      }
+    ]
+  }
+}
