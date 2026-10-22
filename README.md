@@ -79,7 +79,7 @@ uv run plot_2023.py
 
 | Without asking | Asks first | Not available |
 |---|---|---|
-| Read files in the repo; truffle and other read-only spore.host tools; `scripts/fetch-results.sh`, the `global_mean.py` check, `plot_2023.py` | `spawn_task_run`, `spawn_terminate`, any other shell command | Web search and fetch, direct AWS API calls |
+| Read files in the repo; truffle and other read-only spore.host tools; `scripts/fetch-results.sh`, the `global_mean.py` check | `spawn_task_run`, `spawn_terminate`, any other shell command | Web search and fetch, direct AWS API calls |
 
 ## Cleaning up
 
@@ -105,7 +105,7 @@ The second command deletes the demo bucket and everything in it. spawn keeps the
 | `era5/run.sh`, `era5/era5.py`, `era5/pins.sha256` | The task script, the ERA5 runner, and the checksums of everything the instance reads |
 | `era5/task.template.json` | The Demo 2 task spec; `scripts/setup-aws.sh` fills in your bucket |
 | `scripts/` | Setup and fetch |
-| `plot_2023.py` | The closing graph |
+| `plot_2023.py` | Optional graph of the daily 2023 means (run it yourself) |
 | `demo/prompts.md` | The prompts used in the talk, and reference values |
 
 ## Resetting between takes
