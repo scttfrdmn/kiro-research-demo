@@ -1,0 +1,3 @@
+# Keep uv's cache inside the repo: Kiro's command sandbox blocks the default
+# cache location, and agents otherwise prefix every command with UV_CACHE_DIR.
+cache-dir = ".uv-cache"

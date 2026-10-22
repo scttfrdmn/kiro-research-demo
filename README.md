@@ -99,6 +99,7 @@ The second command deletes the demo bucket and everything in it. spawn keeps the
 | `tests/` | Empty on `main`; Demo 1 fills it |
 | `.kiro/steering/research.md` | Lab rules loaded into every Kiro session |
 | `.kiro/hooks/identity-tests.json` | Runs `pytest` whenever a Python file is saved |
+| `uv.toml` | Keeps uv's cache in `.uv-cache/`, inside the repo, where Kiro's command sandbox allows writes |
 | `.kiro/agents/research.json` | The Demo 2 agent and what it may do |
 | `.kiro/settings/mcp.json` | Connects Kiro to spore-host-mcp |
 | `era5/run.sh`, `era5/era5.py`, `era5/pins.sha256` | The task script, the ERA5 runner, and the checksums of everything the instance reads |

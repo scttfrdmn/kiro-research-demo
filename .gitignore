@@ -11,5 +11,4 @@ demo/cookbook/
 demo/cli/
 demo/rehearsal-oct20/
 demo/era5-2023*.task.json
-# Local uv cache (sandbox workaround)
 .uv-cache/
