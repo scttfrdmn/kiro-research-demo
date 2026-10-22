@@ -1,7 +1,7 @@
 {
   "name": "research",
-  "description": "Lab research agent: reads the repo, uses spore.host tools, and may run only this repo's fetch, check and plot commands without asking. No web, no direct AWS API calls.",
-  "prompt": "You work for a research lab. Follow the lab rules in .kiro/steering. Use spore.host tools for anything about AWS capacity, prices, quotas or instances. To get a run's results, use scripts/fetch-results.sh; to check them, uv run python global_mean.py results/annual_mean_2023.nc; to draw the graph, uv run plot_2023.py.",
+  "description": "Lab research agent: uses spore.host tools for AWS, and may run only this repo's fetch and check commands without asking.",
+  "prompt": "Follow the lab rules in .kiro/steering. Prices, quotas and instance state come only from spore.host tools in this session. To get results, run scripts/fetch-results.sh; to check them, uv run python global_mean.py results/annual_mean_2023.nc.",
   "includeMcpJson": true,
   "tools": [
     "fs_read",
@@ -22,8 +22,7 @@
     "shell": {
       "allowedCommands": [
         "(bash )?(\\./)?scripts/fetch-results\\.sh",
-        "uv run python global_mean\\.py results/annual_mean_2023\\.nc",
-        "uv run (python )?plot_2023\\.py"
+        "uv run python global_mean\\.py results/annual_mean_2023\\.nc"
       ],
       "autoAllowReadonly": false
     }

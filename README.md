@@ -32,8 +32,8 @@ uv run python global_mean.py          # Global-mean temperature: 274.999 K  (the
 
 Open this folder in the Kiro IDE. The prompts are in [`demo/prompts.md`](demo/prompts.md), typed verbatim in the talk.
 
-1. Read `.kiro/steering/research.md`, the lab rules Kiro loads into every session: tests assert known values, tolerances are stated, no number is reported that was not computed.
-2. Start a **bugfix spec** with the Demo 1 prompt. Review what it proposes before approving: the expected value, and whether its tests assert known values.
+1. Read `.kiro/steering/research.md`, the lab rules Kiro loads into every session. The first rule sizes the spec and tests to the change, so a one-line fix gets a short spec.
+2. Start a **bugfix spec** with the Demo 1 prompt. Review what it proposes before approving: whether its tests assert known answers.
 3. Run the tasks. The hook in `.kiro/hooks/identity-tests.json` runs `pytest` every time Kiro saves a Python file.
 4. `uv run python global_mean.py` should now print **283.331 K**.
 
